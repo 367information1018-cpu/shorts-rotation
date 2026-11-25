@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "쇼츠 회전",
+  "version": "1.5.1",
+  "description": "PC 유튜브 쇼츠에서 옆으로 누운 영상을 버튼으로 돌려 봅니다.",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/clippivot-16.png",
+    "32": "icons/clippivot-32.png",
+    "48": "icons/clippivot-48.png",
+    "128": "icons/clippivot-128.png"
+  },
+  "action": {
+    "default_title": "쇼츠 회전",
+    "default_icon": {
+      "16": "icons/clippivot-16.png",
+      "32": "icons/clippivot-32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["shorts-rotation.css"],
+      "js": ["preferences.js", "shorts-rotation.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

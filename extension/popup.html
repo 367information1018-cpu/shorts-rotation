@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>쇼츠 회전</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="preferences.js" defer></script>
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <h1>쇼츠 회전</h1>
+      <form id="preferences">
+        <label class="setting">
+          <span class="setting-text">
+            <span class="setting-label" id="enabled-label">쇼츠 회전 사용</span>
+            <span class="setting-help" id="enabled-help">끄면 영상이 원래 방향과 크기로 돌아갑니다.</span>
+          </span>
+          <input id="enabled" name="enabled" type="checkbox" role="switch"
+            aria-labelledby="enabled-label" aria-describedby="enabled-help" disabled>
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
+        <label class="setting">
+          <span class="setting-text">
+            <span class="setting-label" id="keep-rotation-label">다음 쇼츠에도 회전 유지</span>
+            <span class="setting-help" id="keep-rotation-help">같은 탭에서 다음 영상에 현재 각도를 적용합니다.</span>
+          </span>
+          <input id="keep-rotation" name="keepRotation" type="checkbox" role="switch"
+            aria-labelledby="keep-rotation-label" aria-describedby="keep-rotation-help" disabled>
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
+        <div class="size-setting">
+          <div class="size-heading">
+            <label class="setting-label" for="video-size">쇼츠 영상 크기</label>
+            <output class="size-value" for="video-size">100%</output>
+          </div>
+          <input id="video-size" name="videoSize" type="range" min="50" max="200" step="5" value="100" disabled>
+        </div>
+        <div class="size-setting">
+          <div class="size-heading">
+            <label class="setting-label" for="toolbar-size">회전 창 크기</label>
+            <output class="size-value" for="toolbar-size">100%</output>
+          </div>
+          <input id="toolbar-size" name="toolbarSize" type="range" min="75" max="150" step="5" value="100" disabled>
+        </div>
+      </form>
+      <p id="status" role="status" hidden></p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+.shorts-rotation-toolbar {
+  position: absolute;
+  top: 56px;
+  right: 10px;
+  z-index: 12;
+  display: grid;
+  width: max-content;
+}
+
+.shorts-rotation-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  padding: 4px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 24px;
+  background: rgb(18 18 18 / 91%);
+  color: #f1f1f1;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 34%);
+  backdrop-filter: blur(12px);
+  font-family: Roboto, Arial, sans-serif;
+  user-select: none;
+  zoom: var(--shorts-toolbar-scale, 1);
+}
+
+.shorts-rotation-toolbar.is-floating {
+  position: fixed;
+  inset: var(--shorts-toolbar-y) auto auto var(--shorts-toolbar-x);
+  z-index: 2100;
+}
+
+#short-video-container:has(> .shorts-rotation-toolbar) {
+  position: relative;
+}
+
+.shorts-rotation-grip {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 34px;
+  border-radius: 17px;
+  color: #b7b7b7;
+  cursor: grab;
+  touch-action: none;
+}
+
+.shorts-rotation-grip::before {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 5px 0, 0 5px, 5px 5px, 0 10px, 5px 10px;
+  transform: translate(-2.5px, -5px);
+  content: "";
+}
+
+.shorts-rotation-toolbar.is-dragging .shorts-rotation-grip {
+  cursor: grabbing;
+}
+
+.shorts-rotation-toolbar button {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shorts-rotation-arrow {
+  position: relative;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  border: 1.6px solid currentColor;
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.shorts-rotation-arrow::after {
+  position: absolute;
+  top: -1px;
+  left: -2.5px;
+  width: 4px;
+  height: 4px;
+  border-bottom: 1.6px solid currentColor;
+  border-left: 1.6px solid currentColor;
+  border-radius: 0 0 0 1px;
+  content: "";
+}
+
+.shorts-rotation-arrow.is-clockwise {
+  transform: scaleX(-1);
+}
+
+.shorts-rotation-toolbar .shorts-rotation-angle {
+  width: 45px;
+  background: rgb(255 255 255 / 11%);
+  color: #b7b7b7;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.shorts-rotation-grip:hover,
+.shorts-rotation-toolbar button:hover:not(:disabled),
+.shorts-rotation-toolbar.is-dragging .shorts-rotation-grip {
+  background: rgb(255 255 255 / 18%);
+}
+
+.shorts-rotation-grip:focus-visible,
+.shorts-rotation-toolbar button:focus-visible {
+  outline: 2px solid #f1f1f1;
+  outline-offset: -2px;
+}
+
+.shorts-rotation-toolbar button:disabled {
+  color: #b7b7b7;
+  cursor: default;
+}
+
+[data-shorts-rotation-slide] {
+  --ytd-shorts-player-width: var(--shorts-rotation-width) !important;
+}
+
+[data-shorts-rotation-reel] {
+  --ytd-shorts-player-width: var(--shorts-rotation-width) !important;
+  --ytd-shorts-player-height: var(--shorts-rotation-height) !important;
+  --ytd-reels-min-height: 0px !important;
+  margin-block-start: var(--shorts-rotation-top) !important;
+}
+
+[data-shorts-rotation-reel] #short-video-container,
+[data-shorts-rotation-reel] #player-container,
+[data-shorts-rotation-reel] ytd-player,
+[data-shorts-rotation-reel] #shorts-player {
+  width: var(--shorts-rotation-width) !important;
+  height: var(--shorts-rotation-height) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+[data-shorts-rotation-reel] > .overlay {
+  /* YouTube's action buttons can extend above a short player. */
+  overflow: visible !important;
+}
+
+[data-shorts-rotation-reel] #shorts-player {
+  overflow: hidden !important;
+}
+
+video[data-shorts-rotation-video] {
+  position: absolute !important;
+  inset: var(--shorts-rotation-center-y) auto auto 50% !important;
+  width: var(--shorts-rotation-source-width) !important;
+  height: var(--shorts-rotation-source-height) !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: translate(-50%, -50%) rotate(var(--shorts-rotation-angle)) !important;
+  transform-origin: center !important;
+}
